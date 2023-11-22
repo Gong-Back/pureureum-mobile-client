@@ -3,7 +3,8 @@ import styled from '@emotion/styled';
 import { COLORS } from '@/constants/styles';
 
 export const Wrapper = styled.div`
-  width: 300px;
+  width: 100%;
+  max-width: 450px;
   gap: 8px;
   display: flex;
   flex-direction: column;

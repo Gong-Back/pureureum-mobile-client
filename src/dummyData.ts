@@ -10,6 +10,34 @@ export const profileDummyData: UserResponses['info'] = {
   profileUrl: '',
 };
 
+// 성동구 컨텐츠
+export const contentData = {
+  title: '국악노래(창) 배우기',
+  thumbnail: '/sample.jpg',
+  type: '교육 강좌',
+  startDate: '2023-11-03',
+  endDate: '2023-11-06',
+  recruitStartDate: '2023-11-03',
+  recruitEndDate: '2023-11-06',
+};
+
+export const contentsData = Array(6)
+  .fill(0)
+  .map((_, i) => ({ ...contentData, id: i + 1 }));
+
+// 시민 제안
+export const opinionData = {
+  status: 'vote',
+  title: '다양한 세대가 함께하는 애니메이션 모음전',
+  thumbnail: '/sample.jpg',
+  voteStartDate: '2023-11-03',
+  voteEndDate: '2023-11-06',
+};
+
+export const opinionsData = Array(6)
+  .fill(0)
+  .map((_, i) => ({ ...opinionData, id: i + 1 }));
+
 // 제안 리스트 조회 시
 // export const opinionData: ProjectResponses['main'] = {
 //  projectPartInformation: {
