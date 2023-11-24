@@ -1,7 +1,7 @@
 import styled from '@emotion/styled';
 
 export const Wrapper = styled.div`
-  padding: 100px 60px 100px;
+  padding: 100px 60px;
 
   .title > span {
     font-weight: 700;
@@ -12,7 +12,7 @@ export const Wrapper = styled.div`
   }
 `;
 
-export const ListWrapper = styled.div`
+export const ListWrap = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;

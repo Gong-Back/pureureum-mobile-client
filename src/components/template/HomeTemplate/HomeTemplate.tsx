@@ -1,11 +1,13 @@
 import { useState } from 'react';
 
-import { contentsData, opinionsData } from 'src/dummyData';
+import { cultureContentListData, opinionVoteListData } from 'src/dummyData';
 
 import Text from '@/components/common/Text';
 import ToggleButton from '@/components/common/ToggleButton';
 import ContentItem from '@/components/domain/Content/ContentItem';
 import OpinionItem from '@/components/domain/Opinion/OpinionItem';
+import { CultureContentInfoType } from '@/constants/types/CultureContentTypes';
+import { OpinionVoteInfoType } from '@/constants/types/OpinionTypes';
 
 import * as styles from './HomeTemplate.style';
 
@@ -28,19 +30,15 @@ const HomeTemplate = () => {
           : '성동구에서 진행하면 좋을 것 같은 문화 콘텐츠 아이디어를 자유롭게 제안하고 투표해주세요!'}
       </Text>
 
-      <styles.ListWrapper>
+      <styles.ListWrap>
         {isContentMode
-          ? contentsData.map((data) => (
-              <ContentItem thumbnail={data.thumbnail} info={data} />
+          ? cultureContentListData.map((info: CultureContentInfoType) => (
+              <ContentItem key={info.id} id={info.id} info={info} />
             ))
-          : opinionsData.map((data) => (
-              <OpinionItem
-                status={data.status as 'vote'}
-                thumbnail={data.thumbnail}
-                info={data}
-              />
+          : opinionVoteListData.map((info: OpinionVoteInfoType) => (
+              <OpinionItem status={info.status} info={info} />
             ))}
-      </styles.ListWrapper>
+      </styles.ListWrap>
     </styles.Wrapper>
   );
 };
