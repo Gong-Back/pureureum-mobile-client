@@ -16,11 +16,38 @@ export const ThumbnailWrap = styled.div`
   height: 205px;
   border-radius: 15px;
   background-color: ${COLORS.grayscale.gray100};
+  box-shadow: 0px 0px 2px 2px ${COLORS.grayscale.gray100};
   position: relative;
   overflow: hidden;
 `;
 
 export const InfoWrap = styled.div`
   display: flex;
-  align-items: center;
+  flex-direction: column;
+  align-items: flex-start;
+
+  .content-title {
+    width: 100%;
+    height: 60px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+  }
+
+  .catgory-tag {
+    display: inline-flex;
+    margin-right: 6px;
+  }
+
+  .content-time {
+    display: flex;
+    align-items: center;
+  }
+
+  .content-time svg {
+    margin-right: 4px;
+  }
 `;
