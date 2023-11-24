@@ -21,6 +21,19 @@ export const ThumbnailWrap = styled.div`
 `;
 
 export const InfoWrap = styled.div`
-  display: flex;
-  align-items: center;
+  .opinion-title {
+    width: 100%;
+    height: 60px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+  }
+
+  .status-tag {
+    display: inline-flex;
+    margin-right: 6px;
+  }
 `;
