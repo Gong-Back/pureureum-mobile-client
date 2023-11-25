@@ -1,4 +1,4 @@
-import { API_URL, NEXT_SERVER_URL } from '@/constants/apis';
+import { NEXT_SERVER_URL } from '@/constants/apis';
 import { ApiResponse, AuthReqParams, AuthResponses } from '@/constants/types';
 
 import { postAsync } from './API';

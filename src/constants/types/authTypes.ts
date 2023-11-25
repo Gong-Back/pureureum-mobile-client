@@ -41,4 +41,8 @@ export type AuthFormType = {
     gender: GenderType;
     currentStep: number;
   };
+  login: {
+    email: string,
+    password: string,
+  }
 };
