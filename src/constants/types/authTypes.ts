@@ -2,21 +2,21 @@ export type GenderType = 'MALE' | 'FEMALE';
 export type SocialPlatformType = 'naver' | 'kakao' | 'google';
 
 export type AuthReqParams = {
-  login: {
-    verifyCode: string;
-    socialType: string;
-  };
-  register: {
-    email: string,
+  'login': {
+    email: string;
+    password: string;
+  }
+  'register': {
     name: string;
+    email: string;
     birthday: [number, number, number];
     gender: GenderType;
-    socialType: SocialPlatformType;
-  };
-  jwt: {
+    password: string;
+  }
+  'jwt': {
     accessToken: string;
-  };
-};
+  }
+}
 
 export type AuthResponses = {
   login: {
@@ -33,8 +33,12 @@ export type AuthResponses = {
 
 export type AuthFormType = {
   register: {
+    email: string,
+    password: string,
+    confirmPassword: string,
     name: string;
     birthday: [number, number, number];
     gender: GenderType;
+    currentStep: number;
   };
 };
