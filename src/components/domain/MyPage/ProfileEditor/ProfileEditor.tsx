@@ -53,7 +53,7 @@ const ProfileEditor = ({ profileUrl, nickname }: ProfileEditorProps) => {
             name="changedNickname"
             onChange={handleChangeNickname}
             max={20}
-            placeholder="변경할 닉네임을 입력해주세요"
+            placeholder={nickname}
           />
         ) : (
           <Text

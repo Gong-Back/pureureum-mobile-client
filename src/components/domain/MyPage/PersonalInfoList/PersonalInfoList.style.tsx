@@ -10,7 +10,8 @@ export const Wrapper = styled.section`
   width: 100%;
   padding: 30px 40px;
 
-  border: 1px solid ${COLORS.grayscale.gray100};
+  border: 1px solid ${COLORS.grayscale.gray200};
+  background-color: ${COLORS.grayscale.cremeWhite};
   border-radius: 10px;
 `;
 

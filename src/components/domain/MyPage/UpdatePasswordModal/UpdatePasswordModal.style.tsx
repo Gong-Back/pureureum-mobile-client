@@ -4,20 +4,13 @@ export const Wrapper = styled.section`
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 30px 0px;
+  gap: 20px;
 
-  width: 330px;
-  margin: 80px auto 30px auto;
+  width: 100%;
+  padding: 40px 25px;
 
   > input {
-    width: 330px;
-    &:last-child {
-      margin-bottom: 110px;
-    }
-  }
-
-  > .confirm-btn {
-    width: 200px;
+    width: 100%;
   }
 `;
 
@@ -25,14 +18,14 @@ export const ButtonBox = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-
-  margin: 110px auto 0 auto;
+  width: 100%;
+  margin-top: 20px;
 
   > .feedback {
     margin-bottom: 16px;
   }
 
   > .confirm-btn {
-    width: 200px;
+    width: 100%;
   }
 `;
