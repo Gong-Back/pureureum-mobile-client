@@ -28,15 +28,48 @@ export class OpinionRepository {
 
   /**
    * 새로운 제안을 생성하는 함수 registerOpinionAsync
-   * @param
+   * @param param.title 제안 게시글 제목
+   * @param param.description 제안 게시글 설명
+   * @param param.opinion 제안 옵션 목록
+   * @param param.thumbnail 제안 게시글 섬네일 파일
    * @returns
    */
-  static async registerOpinionAsync() {
-    const response = await postAsync<any, OpinionResponses['new']>(`/`, {
-      headers: {
-        requireToken: true,
+  static async registerOpinionAsync({
+    title,
+    description,
+    opinions,
+    thumbnail,
+  }: OpinionReqParams['new']) {
+    const formData = new FormData();
+    formData.append(
+      'projectRegisterReq',
+      new Blob(
+        [
+          JSON.stringify({
+            title,
+            description,
+            opinions,
+          }),
+        ],
+        { type: 'application/json' },
+      ),
+      'projectRegisterReq',
+    );
+
+    const response = await postAsync<unknown, OpinionReqParams['new']>(
+      `/`,
+      {
+        title,
+        description,
+        opinions,
+        thumbnail,
       },
-    });
+      {
+        headers: {
+          requireToken: true,
+        },
+      },
+    );
     return response.data;
   }
 
