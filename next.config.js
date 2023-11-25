@@ -18,6 +18,10 @@ const nextConfig = {
         hostname: 'pureureum.s3.ap-northeast-2.amazonaws.com',
         pathname: '/profile/**',
       },
+      {
+        protocol: 'https',
+        hostname: 'yeyak.seoul.go.kr',
+      },
     ],
   },
   async redirects() {
