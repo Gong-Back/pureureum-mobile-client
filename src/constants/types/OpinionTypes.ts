@@ -22,11 +22,26 @@ export interface OpinionDetailInfoType extends CommonInfo {
   contentData: any;
 }
 
+/** 투표 생성 Form 타입 */
+export interface OpinionFormType {
+  title: string;
+  description: string;
+  thumbnail: File | undefined;
+  voteStartDate: Date;
+  voteEndDate: Date;
+  opinions: { index: number; opinion: string }[];
+}
+
 /** 시민 제안 관련 API 요청 타입 */
 export type OpinionReqParams = {
   vote: any;
   finished: any;
-  new: any;
+  new: {
+    title: string;
+    description: string;
+    thumbnail: File;
+    opinions: { index: number; opinion: string }[];
+  };
 };
 
 /** 시민 제안 관련 API 응답 타입 */
