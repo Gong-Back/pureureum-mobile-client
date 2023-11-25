@@ -5,29 +5,25 @@ import { postAsync } from './API';
 
 export class AuthRepository {
   /**
-   * OAuth2 기반 소셜 로그인을 진행하는 함수 socialLoginAsync
-   * @param code 소셜 플랫폼에서 인가 받은 인증 코드 code
-   * @param redirectUrl 로그인 성공 시 redirect 할 URL
-   * @param socialType 로그인을 진행한 소셜 플랫폼 정보
-   * @returns 성공 시 200, 실패 시 40X 에러 반환
+   * 기존 유저의 로그인을 처리하는 함수 loginAsync
+   * @param email 유저의 이메일
+   * @param password 유저의 비밀번호
+   * @returns 성공 시 JWT 액세스 토큰 인계, 실패 시 에러 객체 반환
    */
-  static async loginAsync({ verifyCode, socialType }: AuthReqParams['login']) {
-    const response = await fetch(`${API_URL}/oauth/login/${socialType}`, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json;charset=UTF-8',
-      },
-      body: JSON.stringify({
-        code: verifyCode,
-        redirectUrl: `http://localhost:3000/oauth2/redirect/${socialType}`,
-      }),
+  static async loginAsync({ email, password }: AuthReqParams['login']) {
+    const response = await postAsync<
+      AuthResponses['login'],
+      AuthReqParams['login']
+    >('/auth/login', {
+      email,
+      password,
     });
-    return (await response.json()) as ApiResponse<AuthResponses['login']>;
+    return response;
   }
 
   /**
    *
-   * OAuth2 기반 신규 유저의 회원가입을 처리하는 함수 registerAsync
+   * 신규 유저의 회원가입을 처리하는 함수 registerAsync
    * @param email 유저의 이메일
    * @param name 유저의 실명
    * @param birthday 유저의 생일
@@ -37,39 +33,22 @@ export class AuthRepository {
    */
   static async registerAsync({
     email,
+    password,
     name,
     birthday,
     gender,
-    socialType,
   }: AuthReqParams['register']) {
     const response = await postAsync<
       AuthResponses['register'],
       AuthReqParams['register']
-    >(`/oauth/register`, {
+    >(`/auth/register`, {
       name,
       email,
+      password,
       birthday,
       gender,
-      socialType,
     });
     return response;
-  }
-
-  /**
-   * OAuth2 회원가입 진행을 위한 정보를 서버로부터 받는 함수 socialSearchUserAsync
-   * @param email 회원가입을 진행할 유저의 email
-   * @returns 조회 성공 시 SocialRegisterInput 객체 return, 실패 시 410.
-   */
-  static async tempSearchUserAsync(
-    email: string,
-  ): Promise<ApiResponse<AuthResponses['tempSearch']>> {
-    const response = await fetch(`${API_URL}/oauth/temp/${email}`, {
-      method: 'GET',
-      headers: {
-        'Content-Type': 'application/json;charset=UTF-8',
-      },
-    });
-    return (await response.json()) as ApiResponse<AuthResponses['tempSearch']>;
   }
 
   /**

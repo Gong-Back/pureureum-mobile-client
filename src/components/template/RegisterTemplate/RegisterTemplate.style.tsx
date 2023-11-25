@@ -1,19 +1,18 @@
 import styled from '@emotion/styled';
 
-export const Wrapper = styled.section`
+export const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
-  gap: 55px 0px;
+  padding: 100px 60px 60px;
 
-  width: 400px;
-  margin: 128px auto 0px auto;
+  gap: 32px 0;
 `;
+
 
 export const Header = styled.header`
   display: flex;
   flex-direction: column;
-  gap: 10px 0px;
+  gap: 4px 0px;
 `;
 
 export const VisibleSection = styled.div`
@@ -21,10 +20,15 @@ export const VisibleSection = styled.div`
   overflow: hidden;
 `;
 
-export const Section = styled.section`
-  display: flex;
-  gap: 16px 0px;
-`;
+export const Section = styled.section<{ currentRegisterStep: number }>(
+  ({ currentRegisterStep }) => ({
+    display: 'flex',
+    gap: '16px 0px',
+
+    transform: `translateX(${-100 * currentRegisterStep}%)`,
+    transition: '0.25s all ease-in-out',
+  }),
+);
 
 export const Footer = styled.footer`
   display: flex;
@@ -40,8 +44,8 @@ export const Footer = styled.footer`
 export const Feedback = styled.p(({ theme }) => {
   const { colors, fonts } = theme;
   return {
-    ...fonts.mobile.caption,
     margin: '0px',
     color: colors.caption,
+    ...fonts.mobile.caption,
   };
 });
