@@ -109,11 +109,10 @@ const UpdatePasswordModal = () => {
                   ? COLORS.primary.default
                   : COLORS.grayscale.gray400
               }
-              sizeType="small"
               className="confirm-btn"
               onClick={() => handleSubmit(confirmUpdatePassword)()}
             >
-              비밀번호 변경
+              비밀번호 변경하기
             </Button>
           </style.ButtonBox>
         </style.Wrapper>
