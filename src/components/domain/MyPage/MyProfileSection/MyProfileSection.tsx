@@ -4,6 +4,7 @@ import Button from '@/components/common/Button';
 import Text from '@/components/common/Text';
 import { COLORS } from '@/constants/styles';
 import useModal from '@/hooks/useModal';
+import { useGetUserProfile } from '@/query-hooks/user';
 
 import PersonalInfoList from '../PersonalInfoList';
 import ProfileEditor from '../ProfileEditor';
@@ -13,8 +14,8 @@ import * as styles from './MyProfileSection.style';
 const MyProfileSection = () => {
   const { openModal } = useModal();
 
-  const { email, name, nickname, gender, birthday, profileUrl } =
-    profileDummyData;
+  const { data: userInfo } = useGetUserProfile();
+  const { email, name, nickname, gender, birthday, profileUrl } = userInfo;
 
   return (
     <styles.Wrapper>

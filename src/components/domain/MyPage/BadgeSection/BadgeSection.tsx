@@ -1,6 +1,7 @@
 import Text from '@/components/common/Text';
 import { COLORS } from '@/constants/styles';
 import useModal from '@/hooks/useModal';
+import { useGetUserBadges } from '@/query-hooks/user';
 
 import BadgeInfoModal from '../BadgeInfoModal';
 import * as styles from './BadgeSection.style';
@@ -85,6 +86,9 @@ export const BadgeInfo = [
 
 const BadgeSection = ({ count }: BadgeSectionProps) => {
   const { openModal } = useModal();
+
+  const { data } = useGetUserBadges();
+  console.log(data);
 
   return (
     <styles.Wrapper>

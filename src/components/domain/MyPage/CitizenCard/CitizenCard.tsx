@@ -4,35 +4,19 @@ import dayjs from 'dayjs';
 
 import Text from '@/components/common/Text';
 import { COLORS } from '@/constants/styles';
+import { useGetUserCitizenInfo } from '@/query-hooks/user';
 
 import * as styles from './CitizenCard.style';
 
-interface CitizenCardProps {
-  info?: any;
-}
-
-const CitizenCard = ({ info }: CitizenCardProps) => {
-  const sInfo = {
-    profileImg: '/sample.png',
-    name: '이소원',
-    nickname: '영화 조아',
-    registerDate: new Date('2023-10-05'),
-    activityCount: 3,
-  };
-
-  const {
-    profileImg,
-    name,
-    nickname,
-    registerDate: rDate,
-    activityCount,
-  } = sInfo;
+const CitizenCard = () => {
+  const { data: userInfo } = useGetUserCitizenInfo();
+  const { profileUrl, name, nickname, joinDate, attendCount } = userInfo;
 
   return (
     <styles.Wrapper className="citizen-card">
       <styles.ProfileWrap>
         <styles.ProfileImg>
-          <Image src={profileImg} layout="fill" />
+          <Image src={profileUrl} layout="fill" />
         </styles.ProfileImg>
         <styles.ProfileTextWrap>
           <Text fontStyleName="body2R" color={COLORS.primary.dark}>
@@ -45,11 +29,11 @@ const CitizenCard = ({ info }: CitizenCardProps) => {
           <Text
             fontStyleName="body2R"
             color={COLORS.grayscale.gray500}
-          >{`가입일: ${dayjs(rDate).format('YYYY.MM.DD')}`}</Text>
+          >{`가입일: ${dayjs(joinDate).format('YYYY.MM.DD')}`}</Text>
           <Text
             fontStyleName="body2R"
             color={COLORS.grayscale.gray500}
-          >{`문화 콘텐츠 참여 횟수: ${activityCount}회`}</Text>
+          >{`문화 콘텐츠 참여 횟수: ${attendCount}회`}</Text>
         </styles.ProfileTextWrap>
       </styles.ProfileWrap>
 
