@@ -105,7 +105,7 @@ const OpinionRegisterTemplate = () => {
         thumbnail,
         suggestionVotes: suggestionVotes.map(({ opinion }) => opinion),
       });
-      router.replace('/opinions');
+      router.replace('/opinion');
     } catch (error) {
       if (error instanceof ApiErrorInstance) {
         setError('root', { message: error.errorMessage });
