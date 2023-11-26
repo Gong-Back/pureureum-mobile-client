@@ -34,6 +34,25 @@ const PersonalDataForm = () => {
           color={COLORS.grayscale.gray500}
           className="title"
         >
+          닉네임
+        </Text>
+        <NewTextInput
+          name="nickname"
+          rules={{
+            required: true,
+            minLength: 2,
+            maxLength: 10,
+          }}
+          placeholder="닉네임"
+          isRound
+        />
+      </style.Section>
+      <style.Section>
+        <Text
+          fontStyleName="body2B"
+          color={COLORS.grayscale.gray500}
+          className="title"
+        >
           생년월일
         </Text>
         <NewTextInput

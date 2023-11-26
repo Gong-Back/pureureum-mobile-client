@@ -17,7 +17,7 @@ export interface ApiError {
   /** 백엔드 측에서 전송한 HTTP Status Code */
   code: number;
   /** 백엔드 측에서 전송한 에러 관련 메세지 */
-  messages: string[];
+  errorMessage: string;
   /** 백엔드 측에서 전송한 에러 관련 데이터 */
   data: { [field: string]: string } | null;
 }

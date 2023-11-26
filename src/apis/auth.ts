@@ -10,7 +10,10 @@ export class AuthRepository {
    * @param password 유저의 비밀번호
    * @returns 성공 시 JWT 액세스 토큰 인계, 실패 시 에러 객체 반환
    */
-  static async loginAsync({ email, password }: AuthReqParams['login']) {
+  static async loginAsync({
+    email,
+    password,
+  }: AuthReqParams['login']) {
     const response = await postAsync<
       AuthResponses['login'],
       AuthReqParams['login']
@@ -26,6 +29,7 @@ export class AuthRepository {
    * 신규 유저의 회원가입을 처리하는 함수 registerAsync
    * @param email 유저의 이메일
    * @param name 유저의 실명
+   * @param nickname 유저의 닉네임
    * @param birthday 유저의 생일
    * @param gender 유저의 성별 (MALE, FEMALE)
    * @param socialType 소셜 플랫폼 타입 (NAVER, KAKAO, GOOGLE)
@@ -35,6 +39,7 @@ export class AuthRepository {
     email,
     password,
     name,
+    nickname,
     birthday,
     gender,
   }: AuthReqParams['register']) {
@@ -43,6 +48,7 @@ export class AuthRepository {
       AuthReqParams['register']
     >(`/auth/register`, {
       name,
+      nickname,
       email,
       password,
       birthday,

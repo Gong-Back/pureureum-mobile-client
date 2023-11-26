@@ -85,7 +85,7 @@ function handleApiError(err: unknown): ApiError {
     if (err.request) {
       return {
         code: -1,
-        messages: ['서버와의 통신 과정에서 문제가 발생했습니다.'],
+        errorMessage: '서버와의 통신 과정에서 문제가 발생했습니다.',
         data: null,
       };
     }
@@ -93,7 +93,7 @@ function handleApiError(err: unknown): ApiError {
   // axios 오류가 아닌 다른 케이스의 오류일 경우
   return {
     code: -1,
-    messages: ['원인 미상의 오류가 발생했습니다.'],
+    errorMessage: '원인 미상의 오류가 발생했습니다.',
     data: null,
   };
 }
@@ -103,12 +103,12 @@ export class ApiErrorInstance extends Error {
   constructor(error: ApiError) {
     super();
     this.name = 'ApiError';
-    this.messages = error.messages;
+    this.errorMessage = error.errorMessage;
     this.code = error.code;
     this.data = error.data;
   }
 
-  messages: ApiError['messages'];
+  errorMessage: ApiError['errorMessage'];
 
   code: ApiError['code'];
 
