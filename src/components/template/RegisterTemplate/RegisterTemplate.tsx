@@ -47,6 +47,7 @@ const RegisterTemplate = () => {
       password: '',
       confirmPassword: '',
       name: '',
+      nickname: '',
       birthday: [currentYear, currentMonth, currentDay],
       gender: 'MALE',
       currentStep: 0,
@@ -60,20 +61,24 @@ const RegisterTemplate = () => {
     handleSubmit,
   } = formMethods;
 
-  const [name, email, password, confirmPassword, birthday, currentStep] =
-    useWatch({
-      control,
-      name: [
-        'name',
-        'email',
-        'password',
-        'confirmPassword',
-        'birthday',
-        'currentStep',
-      ],
-    });
-
-  console.log({name, email, password, confirmPassword, birthday, currentStep})
+  const [
+    name,
+    email,
+    password,
+    confirmPassword,
+    birthday,
+    currentStep,
+  ] = useWatch({
+    control,
+    name: [
+      'name',
+      'email',
+      'password',
+      'confirmPassword',
+      'birthday',
+      'currentStep',
+    ],
+  });
 
   const { title, subtitle } = RegisterStepHeader[currentStep];
 
@@ -100,12 +105,16 @@ const RegisterTemplate = () => {
     submittedData,
   ) => {
     try {
-      await AuthRepository.registerAsync(submittedData);
+      await AuthRepository.registerAsync({
+        ...submittedData,
+        birthday: submittedData.birthday
+          .map((date) => String(date).padStart(2, '0'))
+          .join('-'),
+      });
       router.replace('/auth/login');
     } catch (error) {
       if (error instanceof ApiErrorInstance) {
-        const [errorMessage] = error.messages;
-        setError('root', { message: errorMessage });
+        setError('root', { message: error.errorMessage });
       } else {
         throw error;
       }

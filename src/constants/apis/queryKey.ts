@@ -13,6 +13,15 @@ const QUERY_KEY = {
     ],
     detail: (id: number) => [...QUERY_KEY.PROJECT.base, 'detail', id],
   },
+  OPINION: {
+    base: ['opinions'],
+    list: () => [...QUERY_KEY.OPINION.base, 'list'],
+    detail: (suggestionId: number) => [
+      ...QUERY_KEY.OPINION.base,
+      'detail',
+      suggestionId,
+    ],
+  },
 };
 
 export default QUERY_KEY;

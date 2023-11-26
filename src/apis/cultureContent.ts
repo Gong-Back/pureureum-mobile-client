@@ -13,6 +13,6 @@ export class ProjectRepository {
    */
   static async getCultureContentAsync(params: CultureContentReqParams) {
     const response = await getAsync<CultureContentResponses>(`/`, {});
-    return response.data;
+    return response;
   }
 }
