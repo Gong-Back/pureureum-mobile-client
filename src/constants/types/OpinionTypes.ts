@@ -1,52 +1,77 @@
-export type OpinionStatusType = 'vote' | 'finished';
+export type OpinionStatusType = 'IN_PROGRESS' | 'FINISHED';
 
-interface CommonInfo {
+export type OpinionSortType =
+  | 'LATEST'
+  | 'HIGHTEST_VOTE_COUNT'
+  | 'LOWEST_VOTE_COUNT';
+
+export interface OpinionType {
   id: number;
-  status: OpinionStatusType;
   title: string;
-  thumbnail: string;
-  description: string;
-  voteStartDate: Date;
-  voteEndDate: Date;
+  startDate: string;
+  endDate: string;
+  isVoted: boolean;
+  totalVoteCount: number;
+  createdDate: string;
 }
 
-/** 투표 중인 제안 */
-export interface OpinionVoteInfoType extends CommonInfo {
-  status: 'vote';
-  voteData: any;
-}
-
-/** 투표 종료된 제안 */
-export interface OpinionDetailInfoType extends CommonInfo {
-  status: 'finished';
-  contentData: any;
+export interface OpinionOptionType {
+  id: number;
+  content: string;
+  voteCount: number;
 }
 
 /** 투표 생성 Form 타입 */
 export interface OpinionFormType {
   title: string;
-  description: string;
+  content: string;
   thumbnail: File | undefined;
   voteStartDate: Date;
   voteEndDate: Date;
-  opinions: { index: number; opinion: string }[];
+  suggestionVotes: { index: number; opinion: string }[];
 }
 
 /** 시민 제안 관련 API 요청 타입 */
 export type OpinionReqParams = {
-  vote: any;
-  finished: any;
-  new: {
-    title: string;
-    description: string;
-    thumbnail: File;
-    opinions: { index: number; opinion: string }[];
+  list: {
+    size?: number;
+    lastId?: number;
+    sortType?: OpinionSortType;
+    status?: OpinionStatusType;
   };
+  detail: {
+    suggestionId: number;
+  };
+  create: {
+    title: string;
+    content: string;
+    thumbnail: File;
+    suggestionVotes: string[];
+  };
+  voted: {
+    suggestionId: number;
+    suggestionVoteId: number;
+  }
+  reverted: {
+    suggestionId: number;
+    suggestionVoteId: number;
+  }
 };
 
 /** 시민 제안 관련 API 응답 타입 */
 export type OpinionResponses = {
-  vote: any;
-  finished: any;
-  new: any;
+  list: {
+    lastId: number;
+    totalVoteCount: number;
+    hasNext: boolean;
+    content: OpinionType[];
+  };
+  detail: OpinionType & {
+    content: string;
+    suggestionVotes: OpinionOptionType[];
+    userVotedInfo?: {
+      isVoted: boolean;
+      votedId?: number;
+    };
+  };
 };

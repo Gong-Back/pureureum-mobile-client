@@ -3,7 +3,7 @@ import {
   OpinionResponses,
 } from '@/constants/types/OpinionTypes';
 
-import { getAsync, postAsync } from './API';
+import { deleteAsync, getAsync, postAsync } from './API';
 
 export class OpinionRepository {
   /**
@@ -11,8 +11,20 @@ export class OpinionRepository {
    * @param
    * @returns
    */
-  static async getOpinionVoteDataAsync(params: OpinionReqParams['vote']) {
-    const response = await getAsync<OpinionResponses['vote']>(`/`, {});
+  static async getOpinionListAsync({
+    size,
+    lastId,
+    sortType,
+    status,
+  }: OpinionReqParams['list']) {
+    const response = await getAsync<OpinionResponses['list']>(`/suggestions`, {
+      params: {
+        size,
+        lastId,
+        sortType,
+        status,
+      },
+    });
     return response.data;
   }
 
@@ -21,8 +33,13 @@ export class OpinionRepository {
    * @param
    * @returns
    */
-  static async getOpinionDetailDataAsync(params: OpinionReqParams['finished']) {
-    const response = await getAsync<OpinionResponses['finished']>(`/`, {});
+  static async getOpinionDetailAsync({
+    suggestionId,
+  }: OpinionReqParams['detail']) {
+    const response = await getAsync<OpinionResponses['detail']>(
+      `/suggestions/${suggestionId}`,
+      {},
+    );
     return response.data;
   }
 
@@ -34,34 +51,18 @@ export class OpinionRepository {
    * @param param.thumbnail 제안 게시글 섬네일 파일
    * @returns
    */
-  static async registerOpinionAsync({
+  static async postCreateOpinionAsync({
     title,
-    description,
-    opinions,
+    content,
+    suggestionVotes,
     thumbnail,
-  }: OpinionReqParams['new']) {
-    const formData = new FormData();
-    formData.append(
-      'projectRegisterReq',
-      new Blob(
-        [
-          JSON.stringify({
-            title,
-            description,
-            opinions,
-          }),
-        ],
-        { type: 'application/json' },
-      ),
-      'projectRegisterReq',
-    );
-
-    const response = await postAsync<unknown, OpinionReqParams['new']>(
+  }: OpinionReqParams['create']) {
+    await postAsync<unknown, OpinionReqParams['create']>(
       `/`,
       {
         title,
-        description,
-        opinions,
+        content,
+        suggestionVotes,
         thumbnail,
       },
       {
@@ -70,20 +71,44 @@ export class OpinionRepository {
         },
       },
     );
-    return response.data;
   }
 
   /**
-   * 제안에 투표하는 함수 voteOpinionAsync
-   * @param
-   * @returns
+   * 사용자가 선택한 제안에 투표를 진행하는 함수 postVoteOpinionAsync
+   * @param param.suggestionId
+   * @param param.suggestionVoteId
    */
-  static async voteOpinionAsync() {
-    const response = await postAsync<void, undefined>(`/`, undefined, {
-      headers: {
-        requireToken: true,
+  static async postVoteOpinionAsync({
+    suggestionId,
+    suggestionVoteId,
+  }: OpinionReqParams['voted']) {
+    await postAsync<void, undefined>(
+      `/suggestions/${suggestionId}/${suggestionVoteId}/votes`,
+      undefined,
+      {
+        headers: {
+          requireToken: true,
+        },
       },
-    });
-    return response.data;
+    );
+  }
+
+  /**
+   * 사용자가 제안한 투표를 다시 취소하는 함수 deleteRevertVoteAsync
+   * @param param.suggestionId
+   * @param param.suggestionVoteId
+   */
+  static async deleteRevertVoteAsync({
+    suggestionId,
+    suggestionVoteId,
+  }: OpinionReqParams['reverted']) {
+    await deleteAsync<undefined>(
+      `/suggestions/${suggestionId}/${suggestionVoteId}`,
+      {
+        headers: {
+          requireToken: true,
+        },
+      },
+    );
   }
 }
