@@ -14,9 +14,8 @@ const nextConfig = {
   images: {
     remotePatterns: [
       {
-        protocol: 'http',
+        protocol: 'https',
         hostname: 'pureureum.s3.ap-northeast-2.amazonaws.com',
-        pathname: '/profile/**',
       },
       {
         protocol: 'https',
