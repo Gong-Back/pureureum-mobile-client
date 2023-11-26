@@ -8,8 +8,9 @@ export type AuthReqParams = {
   }
   'register': {
     name: string;
+    nickname: string;
     email: string;
-    birthday: [number, number, number];
+    birthday: string;
     gender: GenderType;
     password: string;
   }
@@ -37,6 +38,7 @@ export type AuthFormType = {
     password: string,
     confirmPassword: string,
     name: string;
+    nickname: string;
     birthday: [number, number, number];
     gender: GenderType;
     currentStep: number;
