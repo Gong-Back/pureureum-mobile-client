@@ -47,7 +47,7 @@ export type OpinionReqParams = {
     title: string;
     content: string;
     thumbnail: File;
-    suggestionVotes: string[];
+    suggestionVotes: OpinionOptionType[];
   };
   voted: {
     suggestionId: number;
@@ -70,7 +70,7 @@ export type OpinionResponses = {
   detail: OpinionType & {
     content: string;
     suggestionVotes: OpinionOptionType[];
-    userVotedInfo?: {
+    userVotedInfo: {
       isVoted: boolean;
       votedId?: number;
     };
