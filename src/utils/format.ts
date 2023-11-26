@@ -55,12 +55,22 @@ class FormatUtil {
   }
 
   /**
-   * 핸드폰 번호 가운데 번호를 마스킹 처리하는 함수 formatMaskPhoneNum
+   * 핸드폰 번호 가운데 자리를 숨김 처리하는 함수 formatMaskPhoneNum
    * @param phoneNumber
    * @returns `010-****-NNNN`
    */
   static formatMaskPhoneNum(phoneNumber: string) {
     return phoneNumber.replace(/-[0-9]{4}-/g, '-****-');
+  }
+
+  /**
+   * 백분율을 계산하여 소수점 둘째 자리까지만 표기하는 함수 formatPercentage
+   * @param whole 전체 표본 값
+   * @param current 백분율 치환 값
+   * @returns 
+   */
+  static formatPercentage(whole: number, current: number) {
+    return `${((current / whole) * 100).toFixed(2)}%`;
   }
 }
 

@@ -38,7 +38,11 @@ export class OpinionRepository {
   }: OpinionReqParams['detail']) {
     const response = await getAsync<OpinionResponses['detail']>(
       `/suggestions/${suggestionId}`,
-      {},
+      {
+        headers: {
+          requireToken: true,
+        },
+      },
     );
     return response;
   }
@@ -113,7 +117,7 @@ export class OpinionRepository {
     suggestionVoteId,
   }: OpinionReqParams['reverted']) {
     await deleteAsync<undefined>(
-      `/suggestions/${suggestionId}/${suggestionVoteId}`,
+      `/suggestions/${suggestionId}/${suggestionVoteId}/votes`,
       {
         headers: {
           requireToken: true,

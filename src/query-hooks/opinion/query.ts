@@ -7,6 +7,7 @@ import type {
   OpinionReqParams,
   OpinionResponses,
 } from '@/constants/types';
+import useSuspendedQuery from '@/hooks/useSuspensedQuery';
 
 /**
  * 생성된 제안 글 목록을 조회하는 Query Hook useGetOpinionList
@@ -31,4 +32,21 @@ export const useGetOpinionList = ({
     getNextPageParam: (lastPage) =>
       lastPage.hasNext ? lastPage.lastId : undefined,
     getPreviousPageParam: (firstPage) => firstPage?.lastId,
+    staleTime: 60 * 1000,
+  });
+
+/**
+ * 생성된 제안 글의 ID 를 기반으로 상세 정보를 조회하는 Query Hook useGetOpinionDetail
+ * @param suggestionId 제안 게시글 ID
+ * @returns 투표 글 상세 정보
+ */
+export const useGetOpinionDetail = (suggestionId: number) =>
+  useSuspendedQuery<
+    OpinionResponses['detail'],
+    ApiError,
+    OpinionResponses['detail']
+  >({
+    queryFn: () => OpinionRepository.getOpinionDetailAsync({ suggestionId }),
+    queryKey: QUERY_KEY.OPINION.detail(suggestionId),
+    staleTime: 60 * 1000,
   });

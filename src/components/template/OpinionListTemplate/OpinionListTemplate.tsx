@@ -1,3 +1,6 @@
+import { useRouter } from 'next/router';
+
+import Button from '@/components/common/Button';
 import Text from '@/components/common/Text';
 import OpinionItem from '@/components/domain/Opinion/OpinionItem';
 import type { OpinionType } from '@/constants/types';
@@ -7,6 +10,8 @@ import { useGetOpinionList } from '@/query-hooks/opinion';
 import * as styles from './OpinionListTemplate.style';
 
 const OpinionListTemplate = () => {
+  const router = useRouter();
+
   const {
     data: opinionDataList,
     fetchNextPage: fetchNextOpinionList,
@@ -34,32 +39,50 @@ const OpinionListTemplate = () => {
         [],
       )
       .flat() || [];
+  <styles.BottomWrap>
+    <Button sizeType="large" isFilled isRound>
+      컨텐츠 제안하기
+    </Button>
+  </styles.BottomWrap>;
 
   return (
-    <styles.Wrapper>
-      <Text fontStyleName="subtitle2B" className="title">
-        시민들이 제안한 문화 콘텐츠
-      </Text>
-      <Text fontStyleName="body2R">
-        투표 기간 끝나서 완료되었던 것들 여기에 몰아넣을거에요
-      </Text>
-      <styles.ListWrap
-        ref={(element) => {
-          if (element?.lastElementChild)
-            targetRef.current = element.lastElementChild;
-        }}
-      >
-        {opinionList.map((opinion) => (
-          <OpinionItem
-            key={opinion.id}
-            id={opinion.id}
-            title={opinion.title}
-            thumbnailUrl={opinion.thumbnailUrl}
-            endDate={opinion.endDate}
-          />
-        ))}
-      </styles.ListWrap>
-    </styles.Wrapper>
+    <>
+      <styles.Wrapper>
+        <Text fontStyleName="subtitle2B" className="title">
+          시민들이 제안한 문화 콘텐츠
+        </Text>
+        <Text fontStyleName="body2R">
+          투표 기간 끝나서 완료되었던 것들 여기에 몰아넣을거에요
+        </Text>
+        <styles.ListWrap
+          ref={(element) => {
+            if (element?.lastElementChild)
+              targetRef.current = element.lastElementChild;
+          }}
+        >
+          {opinionList.map((opinion) => (
+            <OpinionItem
+              key={opinion.id}
+              id={opinion.id}
+              title={opinion.title}
+              thumbnailUrl={opinion.thumbnailUrl}
+              endDate={opinion.endDate}
+            />
+          ))}
+        </styles.ListWrap>
+      </styles.Wrapper>
+      <styles.BottomWrap>
+        <Button
+          onClick={() => router.push('/opinion/new')}
+          className="submit"
+          sizeType="large"
+          isFilled
+          isRound
+        >
+          컨텐츠 제안하기
+        </Button>
+      </styles.BottomWrap>
+    </>
   );
 };
 

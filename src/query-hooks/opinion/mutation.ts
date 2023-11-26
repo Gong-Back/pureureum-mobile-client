@@ -29,21 +29,14 @@ export function usePostCreateOpinion() {
  * @param param.suggestionId 제안 글 ID
  * @param param.suggestionVoteId 취소할 제안 항목 ID
  */
-export function usePostVoteOpinion({
-  suggestionId,
-  suggestionVoteId,
-}: OpinionReqParams['voted']) {
-  const queryClient = useQueryClient();
-  return useMutation<void, ApiError, OpinionReqParams['voted']>({
-    mutationFn: () =>
+export function usePostVoteOpinion(suggestionId: number) {
+  return useMutation<void, ApiError, number>({
+    mutationFn: (suggestionVoteId: number) =>
       OpinionRepository.postVoteOpinionAsync({
         suggestionId,
         suggestionVoteId,
       }),
     mutationKey: QUERY_KEY.OPINION.detail(suggestionId),
-    onSuccess: () => {
-      queryClient.invalidateQueries(QUERY_KEY.OPINION.detail(suggestionId));
-    },
   });
 }
 
@@ -52,20 +45,13 @@ export function usePostVoteOpinion({
  * @param param.suggestionId 제안 글 ID
  * @param param.suggestionVoteId 취소할 제안 항목 ID
  */
-export function useDeleteRevertOpinion({
-  suggestionId,
-  suggestionVoteId,
-}: OpinionReqParams['reverted']) {
-  const queryClient = useQueryClient();
-  return useMutation<void, ApiError, OpinionReqParams['reverted']>({
-    mutationFn: () =>
+export function useDeleteRevertOpinion(suggestionId: number) {
+  return useMutation<void, ApiError, number>({
+    mutationFn: (suggestionVoteId: number) =>
       OpinionRepository.deleteRevertVoteAsync({
         suggestionId,
         suggestionVoteId,
       }),
     mutationKey: QUERY_KEY.OPINION.detail(suggestionId),
-    onSuccess: () => {
-      queryClient.invalidateQueries(QUERY_KEY.OPINION.detail(suggestionId));
-    },
   });
 }

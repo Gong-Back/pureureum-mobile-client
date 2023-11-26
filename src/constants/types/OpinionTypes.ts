@@ -70,7 +70,7 @@ export type OpinionResponses = {
   detail: OpinionType & {
     content: string;
     suggestionVotes: OpinionOptionType[];
-    userVotedInfo?: {
+    userVotedInfo: {
       isVoted: boolean;
       votedId?: number;
     };
