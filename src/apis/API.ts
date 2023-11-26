@@ -125,7 +125,7 @@ export class ApiErrorInstance extends Error {
  */
 export async function getAsync<T>(url: string, config?: AxiosRequestConfig) {
   try {
-    const response = await API.get<T, AxiosResponse<ApiResponse<T>>>(url, {
+    const response = await API.get<T, AxiosResponse<T>>(url, {
       ...config,
     });
     return response.data;
@@ -150,7 +150,7 @@ export async function postAsync<T, D>(
   config?: AxiosRequestConfig,
 ) {
   try {
-    const response = await API.post<T, AxiosResponse<ApiResponse<T>, D>, D>(
+    const response = await API.post<T, AxiosResponse<T, D>, D>(
       url,
       data,
       {
@@ -179,7 +179,7 @@ export async function patchAsync<T, D>(
   config?: AxiosRequestConfig,
 ) {
   try {
-    const response = await API.patch<T, AxiosResponse<ApiResponse<T>, D>, D>(
+    const response = await API.patch<T, AxiosResponse<T, D>, D>(
       url,
       data,
       {

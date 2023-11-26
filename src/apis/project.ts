@@ -24,7 +24,7 @@ export class ProjectRepository {
         size: 6,
       },
     });
-    return response.data;
+    return response;
   }
 
   /**
@@ -36,7 +36,7 @@ export class ProjectRepository {
     const response = await getAsync<ProjectResponses['detail']>(
       `/projects/${id}`,
     );
-    return response.data;
+    return response;
   }
 
   /**
@@ -141,6 +141,6 @@ export class ProjectRepository {
         },
       },
     );
-    return response.data;
+    return response;
   }
 }

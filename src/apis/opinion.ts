@@ -25,7 +25,7 @@ export class OpinionRepository {
         status,
       },
     });
-    return response.data;
+    return response;
   }
 
   /**
@@ -40,7 +40,7 @@ export class OpinionRepository {
       `/suggestions/${suggestionId}`,
       {},
     );
-    return response.data;
+    return response;
   }
 
   /**
@@ -78,6 +78,7 @@ export class OpinionRepository {
     await postAsync<unknown, FormData>(`/suggestions`, formData, {
       headers: {
         requireToken: true,
+        'Content-Type': 'multipart/form-data',
       },
     });
   }
