@@ -13,9 +13,6 @@ export const Wrapper = styled.div`
 `;
 
 export const ListWrap = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 40px;
-  margin-top: 24px;
+  display: ${(props: { display: boolean }) =>
+    props.display ? 'block' : 'none'};
 `;

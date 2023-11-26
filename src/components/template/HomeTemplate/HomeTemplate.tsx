@@ -1,14 +1,10 @@
 import { useState } from 'react';
 
-import { cultureContentListData, opinionVoteListData } from 'src/dummyData';
-
 import Text from '@/components/common/Text';
 import ToggleButton from '@/components/common/ToggleButton';
-import ContentItem from '@/components/domain/Content/ContentItem';
-import OpinionItem from '@/components/domain/Opinion/OpinionItem';
-import { CultureContentInfoType } from '@/constants/types/CultureContentTypes';
+import ContentList from '@/components/domain/Content/ContentList';
+import OpinionList from '@/components/domain/Opinion/OpinionList';
 
-// import { OpinionVoteInfoType } from '@/constants/types/OpinionTypes';
 import * as styles from './HomeTemplate.style';
 
 const HomeTemplate = () => {
@@ -29,15 +25,11 @@ const HomeTemplate = () => {
           ? '다양한 성동구 문화 콘텐츠를 구경하고 자유롭게 참여해보세요!'
           : '성동구에서 진행하면 좋을 것 같은 문화 콘텐츠 아이디어를 자유롭게 제안하고 투표해주세요!'}
       </Text>
-
-      <styles.ListWrap>
-        {/* {isContentMode
-          ? cultureContentListData.map((info: CultureContentInfoType) => (
-              <ContentItem key={info.id} id={info.id} info={info} />
-            ))
-          : opinionVoteListData.map((info: OpinionVoteInfoType) => (
-              <OpinionItem status={info.status} info={info} />
-            ))} */}
+      <styles.ListWrap display={isContentMode}>
+        <ContentList />
+      </styles.ListWrap>
+      <styles.ListWrap display={!isContentMode}>
+        <OpinionList status="IN_PROGRESS" />
       </styles.ListWrap>
     </styles.Wrapper>
   );

@@ -3,7 +3,8 @@ import styled from '@emotion/styled';
 export const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
-  padding: 100px 60px 60px;
+  justify-content: center;
+  padding: 150px 60px 60px;
 `;
 
 export const Header = styled.header`
@@ -13,7 +14,6 @@ export const Header = styled.header`
 
   margin-bottom: 48px;
 `;
-
 
 export const Section = styled.section`
   display: flex;
