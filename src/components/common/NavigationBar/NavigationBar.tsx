@@ -24,7 +24,7 @@ const NavigationBar = ({ isLogin }: NavigationBarProps) => {
       </style.LogoWrapper>
       <style.NavItemList>
         {isLogin ? (
-          <p>프로필</p>
+          <style.DefaultProfile />
         ) : (
           <Button
             sizeType="small"

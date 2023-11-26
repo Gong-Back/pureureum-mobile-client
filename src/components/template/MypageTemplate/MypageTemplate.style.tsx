@@ -21,6 +21,14 @@ export const ProfileImg = styled.div`
   height: 80px;
   border-radius: 40px;
   background-color: ${COLORS.grayscale.gray100};
+
+  img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 80px;
+    height: 80px;
+  }
 `;
 
 export const Title = styled.div`

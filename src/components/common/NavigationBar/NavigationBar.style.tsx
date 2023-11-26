@@ -37,3 +37,10 @@ export const NavItemList = styled.div`
     width: 72px;
   }
 `;
+
+export const DefaultProfile = styled.div`
+  width: 30px;
+  height: 30px;
+  border-radius: 15px;
+  background-color: ${COLORS.grayscale.gray200};
+`;

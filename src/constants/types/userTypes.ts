@@ -1,4 +1,5 @@
 import { GenderType } from './authTypes';
+import { CultureEventInfoType } from './contentTypes';
 
 export type UserReqParams = {
   updateInfo: {
@@ -18,6 +19,18 @@ export type UserResponses = {
     gender: GenderType;
     birthday: string;
     profileUrl: string;
+  };
+  citizen: {
+    nickname: string;
+    name: string;
+    joinDate: string;
+    profileUrl: string;
+    attendCount: number;
+  };
+  badge: { badgeUrl: string; isLocked: boolean }[];
+  activity: {
+    listTotalCount: number;
+    culturalEventDtos: CultureEventInfoType[];
   };
 };
 

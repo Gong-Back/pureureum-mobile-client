@@ -29,7 +29,7 @@ const MypageDetailTemplate = ({ menu }: MypageDetailTemplateProps) => {
       case 'badge':
         return <BadgeSection count={count} />;
       case 'activity':
-        return <ActivitySection contentData={{}} opinionData={{}} />;
+        return <ActivitySection />;
       case 'myinfo':
         return <MyProfileSection />;
       default:
