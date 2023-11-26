@@ -15,6 +15,7 @@ import {
   useDeleteRevertOpinion,
   usePostVoteOpinion,
 } from '@/query-hooks/opinion/mutation';
+import FormatUtil from '@/utils/format';
 
 import * as style from './OpinionStatus.style';
 
@@ -22,6 +23,7 @@ interface OpinionItemProps {
   title: string;
   endDate: string;
   suggestionVotes: OpinionOptionType[];
+  totalVoteCount: number;
   isVoted: boolean;
   votedId?: number;
 }
@@ -31,6 +33,7 @@ const OpinionStatus = ({
   title,
   endDate,
   suggestionVotes,
+  totalVoteCount,
   isVoted,
   votedId,
 }: OpinionItemProps) => {
@@ -49,12 +52,15 @@ const OpinionStatus = ({
   const { mutateAsync: revertVoteOpinion } =
     useDeleteRevertOpinion(suggestionId);
 
+  const isFinished = status === 'FINISHED';
+  const [{ id: mostVotedOpinionId }] = suggestionVotes.sort(
+    (a, b) => b.voteCount - a.voteCount,
+  );
+
   const submitVoteOption = async () => {
     if (votedId && votedId !== selectedVoteId) await revertVoteOpinion(votedId);
     if (selectedVoteId) await postVoteOpinion(selectedVoteId);
   };
-
-  console.log({ selectedVoteId, isVoted, votedId, suggestionVotes });
 
   return (
     <style.Wrapper>
@@ -78,20 +84,43 @@ const OpinionStatus = ({
                 color={COLORS.grayscale.gray500}
               />
             )}
-            <Text fontStyleName="body2R" color={COLORS.grayscale.gray700}>
+            <Text
+              fontStyleName={
+                isFinished && suggestionVoteId === mostVotedOpinionId
+                  ? 'body2B'
+                  : 'body2R'
+              }
+              color={COLORS.grayscale.gray700}
+            >
               {content}
             </Text>
+            {isFinished && (
+              <Text
+                className="result"
+                fontStyleName={
+                  isFinished && suggestionVoteId === mostVotedOpinionId
+                    ? 'body2B'
+                    : 'body2R'
+                }
+                color={COLORS.grayscale.gray700}
+              >
+                {FormatUtil.formatPercentage(totalVoteCount, voteCount)}
+              </Text>
+            )}
           </style.Opinion>
         ))}
       </style.OpinionWrap>
       <Button
         className="submit"
-        disabled={status === 'FINISHED'}
+        themeColor={
+          isFinished ? COLORS.grayscale.gray400 : COLORS.primary.default
+        }
+        disabled={isFinished}
         onClick={submitVoteOption}
         isFilled
         isRound
       >
-        투표 하기
+        {isFinished ? '종료된 투표입니다' : '투표 하기'}
       </Button>
     </style.Wrapper>
   );

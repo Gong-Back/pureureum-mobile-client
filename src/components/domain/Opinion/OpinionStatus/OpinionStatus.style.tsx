@@ -32,6 +32,10 @@ export const Opinion = styled.div`
   gap: 0 8px;
   align-items: center;
   cursor: pointer;
+
+  .result {
+    margin-left: auto;
+  }
 `
 
 export const Title = styled.div`

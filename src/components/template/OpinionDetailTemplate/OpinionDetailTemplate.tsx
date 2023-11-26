@@ -23,6 +23,7 @@ const OpinionDetailTemplate = () => {
     thumbnailUrl,
     content,
     endDate,
+    totalVoteCount,
     suggestionVotes,
     userVotedInfo,
   } = opinionDetailData;
@@ -51,6 +52,7 @@ const OpinionDetailTemplate = () => {
         title={title}
         endDate={endDate}
         suggestionVotes={suggestionVotes}
+        totalVoteCount={totalVoteCount}
         isVoted={userVotedInfo.isVoted}
         votedId={userVotedInfo?.votedId}
       />
