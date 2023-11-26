@@ -47,7 +47,7 @@ export type OpinionReqParams = {
     title: string;
     content: string;
     thumbnail: File;
-    suggestionVotes: OpinionOptionType[];
+    suggestionVotes: string[];
   };
   voted: {
     suggestionId: number;
