@@ -1,12 +1,8 @@
 import { useState } from 'react';
 
-import { cultureContentListData, opinionVoteListData } from 'src/dummyData';
-
 import Text from '@/components/common/Text';
 import ToggleButton from '@/components/common/ToggleButton';
-import { CultureContentInfoType } from '@/constants/types/CultureContentTypes';
 
-// import { OpinionVoteInfoType } from '@/constants/types/OpinionTypes';
 import ContentItem from '../../Content/ContentItem';
 import OpinionItem from '../../Opinion/OpinionItem';
 import * as styles from './ActivitySection.style';
@@ -36,7 +32,7 @@ const ActivitySection = ({
           ? cultureContentListData
               .slice(4)
               .slice()
-              .map((info: CultureContentInfoType) => (
+              .map((info: CultureEventInfoType) => (
                 <ContentItem key={info.id} id={info.id} info={info} />
               ))
           : opinionVoteListData

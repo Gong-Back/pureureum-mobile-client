@@ -1,7 +1,5 @@
 import { UserResponses } from '@/constants/types';
 
-import { CultureContentInfoType } from './constants/types/CultureContentTypes';
-
 // 마이페이지 접속 시
 export const profileDummyData: UserResponses['info'] = {
   email: 'gwangin1999@naver.com',
@@ -33,7 +31,7 @@ export const cultureContentData = {
   registerEndDateTime: new Date('2023-11-29 17:00:00'),
 };
 
-export const cultureContentListData: CultureContentInfoType[] = Array(6)
+export const cultureContentListData: any[] = Array(6)
   .fill(0)
   .map((_, i) => ({
     ...cultureContentData,

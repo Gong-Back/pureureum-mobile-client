@@ -28,7 +28,8 @@ export const InfoWrap = styled.div`
 
   .content-title {
     width: 100%;
-    height: 60px;
+    height: fit-content;
+    /*height: 60px;*/
     overflow: hidden;
     text-overflow: ellipsis;
 

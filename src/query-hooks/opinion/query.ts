@@ -28,7 +28,7 @@ export const useGetOpinionList = ({
   >({
     queryFn: ({ pageParam: lastId }) =>
       OpinionRepository.getOpinionListAsync({ size, lastId, sortType, status }),
-    queryKey: QUERY_KEY.OPINION.base,
+    queryKey: [...QUERY_KEY.OPINION.base, { status }],
     getNextPageParam: (lastPage) =>
       lastPage.hasNext ? lastPage.lastId : undefined,
     getPreviousPageParam: (firstPage) => firstPage?.lastId,

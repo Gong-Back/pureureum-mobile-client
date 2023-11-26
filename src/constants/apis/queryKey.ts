@@ -22,6 +22,9 @@ const QUERY_KEY = {
       suggestionId,
     ],
   },
+  CULTURE_EVENTS: {
+    base: ['cultureEvents'],
+  },
 };
 
 export default QUERY_KEY;

@@ -1,5 +1,4 @@
 import Image from 'next/image';
-import Link from 'next/link';
 import { useRouter } from 'next/router';
 import React from 'react';
 
@@ -10,32 +9,30 @@ import ModalTemplate from '@/components/common/ModalTemplate';
 import Tag from '@/components/common/Tag';
 import Text from '@/components/common/Text';
 import { COLORS } from '@/constants/styles';
-import { CultureContentInfoType } from '@/constants/types/CultureContentTypes';
+import { CultureEventInfoType } from '@/constants/types/contentTypes';
 
 import * as styles from './ContentDetailModal.style';
 
-const ContentDetailModal = ({ data }: { data: CultureContentInfoType }) => {
+const ContentDetailModal = ({ data }: { data: CultureEventInfoType }) => {
   const router = useRouter();
+
   const {
-    title,
-    thumbnail,
-    category,
-    state,
-    description,
+    thumbnailUrl,
+    clasName: category,
+    content: title,
     paymentMethod,
     placeName,
     target,
     serviceUrl,
-    latitude,
-    longitude,
     serviceStartDateTime,
     serviceEndDateTime,
-    registerStartDateTime,
     registerEndDateTime,
   } = data;
 
+  const leftTime = dayjs(registerEndDateTime).diff(dayjs(), 'day');
+  const targetStr = target.includes('제한없음') ? '모두' : target;
+
   const detailInfo = [
-    { label: '주관', content: '주관' },
     { label: '위치', content: placeName },
     {
       label: '기간',
@@ -51,7 +48,6 @@ const ContentDetailModal = ({ data }: { data: CultureContentInfoType }) => {
       <styles.Wrapper>
         <styles.TagsWrap>
           <Tag label={`#${category}`} />
-          <Tag label={`#${target}`} />
         </styles.TagsWrap>
         <Text
           fontStyleName="subtitle1"
@@ -61,14 +57,14 @@ const ContentDetailModal = ({ data }: { data: CultureContentInfoType }) => {
           {title}
         </Text>
         <styles.ThumbnailWrap>
-          <Image src={thumbnail} layout="fill" />
+          <Image src={thumbnailUrl} layout="fill" />
         </styles.ThumbnailWrap>
         <styles.RecruitInfoWrap>
           <Text fontStyleName="body1R" color={COLORS.grayscale.dark}>
-            모집일이 <span>2일</span> 남았어요.
+            모집일이 <span>{leftTime}일</span> 남았어요!
           </Text>
           <Text fontStyleName="body1R" color={COLORS.grayscale.dark}>
-            <span>20명</span>을 모집하는데 <span>13명</span>이 지원했어요.
+            <span>{targetStr}</span> 에게 추천해요!
           </Text>
         </styles.RecruitInfoWrap>
         <styles.DetailInfoWrap>

@@ -18,14 +18,13 @@
  * registerStartDateTime 접수 시작 시간
  * registerEndDateTime 접수 종료 시간
  */
-export interface CultureContentInfoType {
+export interface CultureEventInfoType {
   id: number;
-  culturalEventId: number;
-  title: string;
-  thumbnail: string;
-  category: string;
+  culturalEventId: string;
+  clasName: string;
+  region: string;
   state: string;
-  description: string;
+  content: string;
   paymentMethod: string;
   placeName: string;
   target: string;
@@ -36,10 +35,27 @@ export interface CultureContentInfoType {
   serviceEndDateTime: Date;
   registerStartDateTime: Date;
   registerEndDateTime: Date;
+  thumbnailUrl: string;
 }
 
+export type CultureEventSortType =
+  | 'SERVICE_LATEST' // 서비스 개시 최신순
+  | 'SERVICE_OLDEST' // 서비스 개시 오래된 순
+  | 'REGISTER_LATEST' // 접수 개시 최신순
+  | 'REGISTER_OLDEST'; // 접수 개시 오래된 순
+
 /** 성동구 문화 컨텐츠 관련 API 요청 타입 */
-export type CultureContentReqParams = {};
+export type CultureEventReqParams = {
+  size?: number;
+  lastId?: number;
+  lastDateTime?: Date;
+  sortType?: CultureEventSortType;
+};
 
 /** 성동구 문화 컨텐츠 관련 API 응답 타입 */
-export type CultureContentResponses = CultureContentInfoType[];
+export type CultureEventResponses = {
+  hasNext: boolean;
+  lastId: number;
+  lastDateTime: Date;
+  content: CultureEventInfoType[];
+};
