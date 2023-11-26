@@ -13,7 +13,7 @@ const OpinionListTemplate = () => {
     hasNextPage,
   } = useGetOpinionList({
     size: 10,
-    status: 'FINISHED',
+    status: 'IN_PROGRESS',
   });
 
   const handleFetchNextOpinion = (entries: IntersectionObserverEntry[]) => {
@@ -55,13 +55,9 @@ const OpinionListTemplate = () => {
             id={opinion.id}
             title={opinion.title}
             thumbnailUrl={opinion.thumbnailUrl}
-            startDate={opinion.startDate}
             endDate={opinion.endDate}
           />
         ))}
-        {/* {dummyOpinionDetailData.map((info) => (
-          <OpinionItem key={info.} status="finished" info={info} />
-        ))} */}
       </styles.ListWrap>
     </styles.Wrapper>
   );

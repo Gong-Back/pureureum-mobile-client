@@ -2,7 +2,6 @@ import Image from 'next/image';
 import { useRouter } from 'next/router';
 
 import dayjs from 'dayjs';
-import isBetween from 'dayjs/plugin/isBetween';
 
 import Tag from '@/components/common/Tag';
 import Text from '@/components/common/Text';
@@ -13,13 +12,10 @@ import type {
 
 import * as style from './OpinionItem.style';
 
-dayjs.extend(isBetween);
-
 interface OpinionItemProps {
   id: number;
   title: string;
   thumbnailUrl: string;
-  startDate: string;
   endDate: string;
 }
 
@@ -28,14 +24,13 @@ const OpinionItem = ({
   id,
   title,
   thumbnailUrl,
-  startDate,
   endDate,
 }: OpinionItemProps) => {
   const router = useRouter();
 
-  const status: OpinionStatusType = dayjs().isBetween(startDate, endDate, 'day')
-    ? 'IN_PROGRESS'
-    : 'FINISHED';
+  const status: OpinionStatusType = dayjs().isAfter(endDate, 'day')
+    ? 'FINISHED'
+    : 'IN_PROGRESS';
 
   return (
     <style.Wrapper onClick={() => router.push(`/opinion/${id}`)}>
