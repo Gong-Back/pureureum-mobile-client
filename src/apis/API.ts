@@ -150,13 +150,9 @@ export async function postAsync<T, D>(
   config?: AxiosRequestConfig,
 ) {
   try {
-    const response = await API.post<T, AxiosResponse<T, D>, D>(
-      url,
-      data,
-      {
-        ...config,
-      },
-    );
+    const response = await API.post<T, AxiosResponse<T, D>, D>(url, data, {
+      ...config,
+    });
     return response.data;
   } catch (error) {
     throw new ApiErrorInstance(handleApiError(error));
@@ -179,13 +175,9 @@ export async function patchAsync<T, D>(
   config?: AxiosRequestConfig,
 ) {
   try {
-    const response = await API.patch<T, AxiosResponse<T, D>, D>(
-      url,
-      data,
-      {
-        ...config,
-      },
-    );
+    const response = await API.patch<T, AxiosResponse<T, D>, D>(url, data, {
+      ...config,
+    });
     return response.data;
   } catch (error) {
     throw new ApiErrorInstance(handleApiError(error));

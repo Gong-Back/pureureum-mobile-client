@@ -1,10 +1,6 @@
 import { UserResponses } from '@/constants/types';
 
 import { CultureContentInfoType } from './constants/types/CultureContentTypes';
-import {
-  OpinionDetailInfoType,
-  OpinionVoteInfoType,
-} from './constants/types/OpinionTypes';
 
 // 마이페이지 접속 시
 export const profileDummyData: UserResponses['info'] = {
@@ -46,7 +42,7 @@ export const cultureContentListData: CultureContentInfoType[] = Array(6)
   }));
 
 // 시민 제안
-export const opinionVoteData: Omit<OpinionVoteInfoType, 'id'> = {
+export const opinionVoteData: Omit<any, 'id'> = {
   status: 'vote',
   title: '다양한 세대가 함께하는 애니메이션 모음전을 진행하는 건 어떨까요?',
   thumbnail: '/sample.png',
@@ -57,11 +53,11 @@ export const opinionVoteData: Omit<OpinionVoteInfoType, 'id'> = {
   voteData: '',
 };
 
-export const opinionVoteListData: OpinionVoteInfoType[] = Array(6)
+export const opinionVoteListData: any[] = Array(6)
   .fill(0)
   .map((_, i) => ({ ...opinionVoteData, id: i + 1 }));
 
-export const opinionDetailData: Omit<OpinionDetailInfoType, 'id'> = {
+export const opinionDetailData: Omit<any, 'id'> = {
   status: 'finished',
   title: '다양한 세대가 함께하는 애니메이션 모음전을 진행하는 건 어떨까요?',
   thumbnail: '/sample.png',
@@ -72,6 +68,6 @@ export const opinionDetailData: Omit<OpinionDetailInfoType, 'id'> = {
   contentData: '',
 };
 
-export const opinionDetailListData: OpinionDetailInfoType[] = Array(6)
+export const opinionDetailListData: any[] = Array(6)
   .fill(0)
   .map((_, i) => ({ ...opinionDetailData, id: i + 1 }));

@@ -16,7 +16,7 @@ export class UserRepository {
         },
       },
     );
-    return response.data;
+    return response;
   }
 
   /**

@@ -7,8 +7,8 @@ import ToggleButton from '@/components/common/ToggleButton';
 import ContentItem from '@/components/domain/Content/ContentItem';
 import OpinionItem from '@/components/domain/Opinion/OpinionItem';
 import { CultureContentInfoType } from '@/constants/types/CultureContentTypes';
-import { OpinionVoteInfoType } from '@/constants/types/OpinionTypes';
 
+// import { OpinionVoteInfoType } from '@/constants/types/OpinionTypes';
 import * as styles from './HomeTemplate.style';
 
 const HomeTemplate = () => {
@@ -31,13 +31,13 @@ const HomeTemplate = () => {
       </Text>
 
       <styles.ListWrap>
-        {isContentMode
+        {/* {isContentMode
           ? cultureContentListData.map((info: CultureContentInfoType) => (
               <ContentItem key={info.id} id={info.id} info={info} />
             ))
           : opinionVoteListData.map((info: OpinionVoteInfoType) => (
               <OpinionItem status={info.status} info={info} />
-            ))}
+            ))} */}
       </styles.ListWrap>
     </styles.Wrapper>
   );

@@ -5,8 +5,8 @@ import { cultureContentListData, opinionVoteListData } from 'src/dummyData';
 import Text from '@/components/common/Text';
 import ToggleButton from '@/components/common/ToggleButton';
 import { CultureContentInfoType } from '@/constants/types/CultureContentTypes';
-import { OpinionVoteInfoType } from '@/constants/types/OpinionTypes';
 
+// import { OpinionVoteInfoType } from '@/constants/types/OpinionTypes';
 import ContentItem from '../../Content/ContentItem';
 import OpinionItem from '../../Opinion/OpinionItem';
 import * as styles from './ActivitySection.style';
@@ -32,7 +32,7 @@ const ActivitySection = ({
         {isContentMode ? '내가 참여한 문화 컨텐츠' : '내가 제안한 아이디어'}
       </Text>
       <styles.ListWrap>
-        {isContentMode
+        {/* {isContentMode
           ? cultureContentListData
               .slice(4)
               .slice()
@@ -43,7 +43,7 @@ const ActivitySection = ({
               .slice(4)
               .map((info: OpinionVoteInfoType) => (
                 <OpinionItem status={info.status} info={info} />
-              ))}
+              ))} */}
       </styles.ListWrap>
     </styles.Wrapper>
   );

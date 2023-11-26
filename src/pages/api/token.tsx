@@ -18,7 +18,7 @@ export default function handler(req: NextApiRequest, res: NextApiResponse) {
       if (!accessToken) {
         throw new ApiErrorInstance({
           code: 400,
-          messages: ['요청에 엑세스 토큰이 없습니다.'],
+          errorMessage: '요청에 엑세스 토큰이 없습니다.',
           data: null,
         });
       }
