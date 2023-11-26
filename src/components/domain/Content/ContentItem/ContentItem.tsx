@@ -6,7 +6,7 @@ import CalendarIconSvg from '@/assets/icons/calendarIcon.svg';
 import Tag from '@/components/common/Tag';
 import Text from '@/components/common/Text';
 import { COLORS } from '@/constants/styles';
-import { CultureContentInfoType } from '@/constants/types/CultureContentTypes';
+import { CultureEventInfoType } from '@/constants/types/contentTypes';
 import useModal from '@/hooks/useModal';
 
 import ContentDetailModal from '../ContentDetailModal';
@@ -14,7 +14,7 @@ import * as style from './ContentItem.style';
 
 export interface ContentItemProps {
   id: number;
-  info: CultureContentInfoType;
+  info: CultureEventInfoType;
 }
 
 // 성동구 신속 예약에서 가져온 컨텐츠 데이터
@@ -22,9 +22,9 @@ const ContentItem = ({ id, info }: ContentItemProps) => {
   const { openModal } = useModal();
 
   const {
-    thumbnail,
-    category,
-    title,
+    thumbnailUrl,
+    clasName: category,
+    content: title,
     serviceStartDateTime: sDate,
     serviceEndDateTime: eDate,
   } = info;
@@ -34,7 +34,7 @@ const ContentItem = ({ id, info }: ContentItemProps) => {
       onClick={() => openModal(<ContentDetailModal data={info} />)}
     >
       <style.ThumbnailWrap>
-        <Image src={thumbnail} layout="fill" />
+        <Image src={thumbnailUrl} layout="fill" />
       </style.ThumbnailWrap>
       <style.InfoWrap>
         <Text
