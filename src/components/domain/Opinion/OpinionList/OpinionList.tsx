@@ -1,3 +1,4 @@
+import Text from '@/components/common/Text';
 import { OpinionStatusType, OpinionType } from '@/constants/types';
 import useIntersectionObserver from '@/hooks/useIntersectionObserver';
 import { useGetOpinionList } from '@/query-hooks/opinion';
@@ -45,15 +46,21 @@ const OpinionList = ({ status }: OpinionListProps) => {
           targetRef.current = element.lastElementChild;
       }}
     >
-      {opinionList.map((opinion) => (
-        <OpinionItem
-          key={opinion.id}
-          id={opinion.id}
-          title={opinion.title}
-          thumbnailUrl={opinion.thumbnailUrl}
-          endDate={opinion.endDate}
-        />
-      ))}
+      {opinionList.length < 1 ? (
+        <Text fontStyleName="body1R" className="none-opinion">
+          아직 투표가 완료된 제안이 없습니다.
+        </Text>
+      ) : (
+        opinionList.map((opinion) => (
+          <OpinionItem
+            key={opinion.id}
+            id={opinion.id}
+            title={opinion.title}
+            thumbnailUrl={opinion.thumbnailUrl}
+            endDate={opinion.endDate}
+          />
+        ))
+      )}
     </styles.Wrapper>
   );
 };

@@ -6,4 +6,8 @@ export const Wrapper = styled.div`
   align-items: center;
   gap: 40px;
   margin-top: 24px;
+
+  .none-opinion {
+    margin-top: 30px;
+  }
 `;

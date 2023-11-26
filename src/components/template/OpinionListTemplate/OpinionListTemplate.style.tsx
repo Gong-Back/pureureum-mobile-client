@@ -1,8 +1,8 @@
-import { COLORS } from '@/constants/styles';
 import styled from '@emotion/styled';
 
 export const Wrapper = styled.div`
   padding: 100px 60px;
+  min-height: calc(100vh - 100px);
 `;
 
 export const ListWrap = styled.div`
@@ -24,9 +24,9 @@ export const BottomWrap = styled.div`
   width: 100%;
   padding: 24px 0;
 
-  background-color: rgba(250, 250, 250, 0.80);
+  background-color: rgba(250, 250, 250, 0.8);
 
   .submit {
     width: 340px;
   }
-` 
+`;

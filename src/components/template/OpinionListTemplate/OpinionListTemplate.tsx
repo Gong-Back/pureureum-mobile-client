@@ -13,10 +13,10 @@ const OpinionListTemplate = () => {
     <>
       <styles.Wrapper>
         <Text fontStyleName="subtitle2B" className="title">
-          시민들이 제안한 문화 콘텐츠
+          성동구 시민이 제안한 문화 콘텐츠
         </Text>
         <Text fontStyleName="body2R">
-          투표 기간 끝나서 완료되었던 것들 여기에 몰아넣을거에요
+          성동구 문화 시민들이 제안했던 문화 콘텐츠 아이디어들을 구경해보세요!
         </Text>
         <OpinionList status="FINISHED" />
       </styles.Wrapper>
