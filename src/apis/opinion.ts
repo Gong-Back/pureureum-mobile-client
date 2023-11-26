@@ -57,20 +57,29 @@ export class OpinionRepository {
     suggestionVotes,
     thumbnail,
   }: OpinionReqParams['create']) {
-    await postAsync<unknown, OpinionReqParams['create']>(
-      `/`,
-      {
-        title,
-        content,
-        suggestionVotes,
-        thumbnail,
-      },
-      {
-        headers: {
-          requireToken: true,
-        },
-      },
+    const formData = new FormData();
+    formData.append('thumbnail', thumbnail);
+    formData.append(
+      'suggestionRequest',
+      new Blob(
+        [
+          JSON.stringify({
+            title,
+            content,
+            suggestionVotes: suggestionVotes.map((suggestion) => ({
+              content: suggestion,
+            })),
+          }),
+        ],
+        { type: 'application/json' },
+      ),
     );
+
+    await postAsync<unknown, FormData>(`/suggestions`, formData, {
+      headers: {
+        requireToken: true,
+      },
+    });
   }
 
   /**
