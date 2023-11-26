@@ -1,4 +1,4 @@
-import { ApiResponse, UserReqParams, UserResponses } from '@/constants/types';
+import { UserReqParams, UserResponses } from '@/constants/types';
 
 import { getAsync, postAsync } from './API';
 
@@ -8,8 +8,50 @@ export class UserRepository {
    * @returns 가입 성공 시 200, 실패 시 에러 반환 (400 등)
    */
   static async getUserInfoAsync() {
-    const response = await getAsync<ApiResponse<UserResponses['info']>>(
-      '/users/me',
+    const response = await getAsync<UserResponses['info']>('/users/me', {
+      headers: {
+        requireToken: true,
+      },
+    });
+    return response;
+  }
+
+  /**
+   * 유저의 문화 시민증에 들어갈 정보를 가져오는 함수 getUserCitizenInfoAsync
+   * @returns 가입 성공 시 200, 실패 시 에러 반환 (400 등)
+   */
+  static async getUserCitizenInfoAsync() {
+    const response = await getAsync<UserResponses['citizen']>(
+      '/users/culture-citizenship',
+      {
+        headers: {
+          requireToken: true,
+        },
+      },
+    );
+    return response;
+  }
+
+  /**
+   * 유저의 문화 시민증에 들어갈 정보를 가져오는 함수 getUserBadgesInfoAsync
+   * @returns 가입 성공 시 200, 실패 시 에러 반환 (400 등)
+   */
+  static async getUserBadgesInfoAsync() {
+    const response = await getAsync<UserResponses['badge']>('/users/badges', {
+      headers: {
+        requireToken: true,
+      },
+    });
+    return response;
+  }
+
+  /**
+   * 유저의 문화 콘텐츠 활동 정보를 가져오는 함수 getUserActivityAsync
+   * @returns 가입 성공 시 200, 실패 시 에러 반환 (400 등)
+   */
+  static async getUserActivityAsync() {
+    const response = await getAsync<UserResponses['activity']>(
+      '/cultural-events/my-attended',
       {
         headers: {
           requireToken: true,

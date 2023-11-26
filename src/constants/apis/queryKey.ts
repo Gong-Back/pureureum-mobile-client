@@ -3,6 +3,8 @@ import { ProjectReqParams } from '../types';
 const QUERY_KEY = {
   USER: {
     base: ['users'],
+    citizen: () => [...QUERY_KEY.USER.base, 'citizen'],
+    badge: () => [...QUERY_KEY.USER.base, 'badge'],
   },
   PROJECT: {
     base: ['projects'],
