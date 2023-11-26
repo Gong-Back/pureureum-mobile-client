@@ -18,8 +18,16 @@ export const useGetCultureEventList = ({
       ContentRepository.getCultureEventListAsync({
         size,
         sortType,
-        lastId: pageParam,
+        lastId: pageParam?.lastId,
+        lastDateTime: pageParam?.lastDateTime,
       }),
-    // getNextPageParam: (lastPage) =>
-    //  lastPage.hasNext ? lastPage.lastId : undefined,
+    getNextPageParam: (lastPage) => {
+      if (lastPage.hasNext) {
+        return {
+          lastId: lastPage.lastId,
+          lastDateTime: lastPage.lastDateTime,
+        };
+      }
+      return undefined;
+    },
   });
