@@ -30,7 +30,6 @@ export function usePostCreateOpinion() {
  * @param param.suggestionVoteId 취소할 제안 항목 ID
  */
 export function usePostVoteOpinion(suggestionId: number) {
-  const queryClient = useQueryClient();
   return useMutation<void, ApiError, number>({
     mutationFn: (suggestionVoteId: number) =>
       OpinionRepository.postVoteOpinionAsync({
@@ -38,9 +37,6 @@ export function usePostVoteOpinion(suggestionId: number) {
         suggestionVoteId,
       }),
     mutationKey: QUERY_KEY.OPINION.detail(suggestionId),
-    onSuccess: () => {
-      queryClient.invalidateQueries(QUERY_KEY.OPINION.detail(suggestionId));
-    },
   });
 }
 
@@ -50,7 +46,6 @@ export function usePostVoteOpinion(suggestionId: number) {
  * @param param.suggestionVoteId 취소할 제안 항목 ID
  */
 export function useDeleteRevertOpinion(suggestionId: number) {
-  const queryClient = useQueryClient();
   return useMutation<void, ApiError, number>({
     mutationFn: (suggestionVoteId: number) =>
       OpinionRepository.deleteRevertVoteAsync({
@@ -58,8 +53,5 @@ export function useDeleteRevertOpinion(suggestionId: number) {
         suggestionVoteId,
       }),
     mutationKey: QUERY_KEY.OPINION.detail(suggestionId),
-    onSuccess: () => {
-      queryClient.invalidateQueries(QUERY_KEY.OPINION.detail(suggestionId));
-    },
   });
 }

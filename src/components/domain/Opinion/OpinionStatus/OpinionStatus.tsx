@@ -1,4 +1,4 @@
-import Image from 'next/image';
+import { useQueryClient } from '@tanstack/react-query';
 import { useRouter } from 'next/router';
 import { useState } from 'react';
 
@@ -9,6 +9,7 @@ import NonCheckedIconSvg from '@/assets/icons/nonCheckedBoxIcon.svg';
 import SmileNewsIconSvg from '@/assets/icons/smileNews.svg';
 import Button from '@/components/common/Button';
 import Text from '@/components/common/Text';
+import QUERY_KEY from '@/constants/apis/queryKey';
 import { COLORS } from '@/constants/styles';
 import { OpinionOptionType, OpinionStatusType } from '@/constants/types';
 import {
@@ -39,6 +40,7 @@ const OpinionStatus = ({
 }: OpinionItemProps) => {
   const router = useRouter();
   const suggestionId = Number(router.query.oid);
+  const queryClient = useQueryClient();
 
   const status: OpinionStatusType = dayjs().isAfter(endDate)
     ? 'FINISHED'
@@ -60,6 +62,7 @@ const OpinionStatus = ({
   const submitVoteOption = async () => {
     if (votedId && votedId !== selectedVoteId) await revertVoteOpinion(votedId);
     if (selectedVoteId) await postVoteOpinion(selectedVoteId);
+    queryClient.invalidateQueries(QUERY_KEY.OPINION.detail(suggestionId));
   };
 
   return (
