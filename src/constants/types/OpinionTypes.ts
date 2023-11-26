@@ -8,6 +8,7 @@ export type OpinionSortType =
 export interface OpinionType {
   id: number;
   title: string;
+  thumbnail: string;
   startDate: string;
   endDate: string;
   isVoted: boolean;
