@@ -26,7 +26,7 @@ const HomeTemplate = () => {
           : '성동구에서 진행하면 좋을 것 같은 문화 콘텐츠 아이디어를 자유롭게 제안하고 투표해주세요!'}
       </Text>
       <styles.ListWrap display={isContentMode}>
-        <ContentList />
+        <ContentList sortType="REGISTER_LATEST" />
       </styles.ListWrap>
       <styles.ListWrap display={!isContentMode}>
         <OpinionList status="IN_PROGRESS" />

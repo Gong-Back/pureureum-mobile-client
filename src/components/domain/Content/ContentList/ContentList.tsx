@@ -1,18 +1,22 @@
-import { CultureEventInfoType } from '@/constants/types';
+import { CultureEventInfoType, CultureEventSortType } from '@/constants/types';
 import useIntersectionObserver from '@/hooks/useIntersectionObserver';
 import { useGetCultureEventList } from '@/query-hooks/content';
 
 import ContentItem from '../ContentItem';
 import * as styles from './ContentList.style';
 
-const ContentList = () => {
+interface ContentListProps {
+  sortType: CultureEventSortType;
+}
+
+const ContentList = ({ sortType }: ContentListProps) => {
   const {
     data: contentDataList,
     fetchNextPage: fetchNextContentList,
     hasNextPage,
   } = useGetCultureEventList({
     size: 10,
-    sortType: 'REGISTER_OLDEST',
+    sortType,
   });
 
   const handleFetchNextContent = (entries: IntersectionObserverEntry[]) => {

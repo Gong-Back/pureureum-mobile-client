@@ -38,7 +38,7 @@ export interface CultureEventInfoType {
   thumbnailUrl: string;
 }
 
-type SortType =
+export type CultureEventSortType =
   | 'SERVICE_LATEST' // 서비스 개시 최신순
   | 'SERVICE_OLDEST' // 서비스 개시 오래된 순
   | 'REGISTER_LATEST' // 접수 개시 최신순
@@ -49,11 +49,13 @@ export type CultureEventReqParams = {
   size?: number;
   lastId?: number;
   lastDateTime?: Date;
-  sortType?: SortType;
+  sortType?: CultureEventSortType;
 };
 
 /** 성동구 문화 컨텐츠 관련 API 응답 타입 */
 export type CultureEventResponses = {
   hasNext: boolean;
+  lastId: number;
+  lastDateTime: Date;
   content: CultureEventInfoType[];
 };
