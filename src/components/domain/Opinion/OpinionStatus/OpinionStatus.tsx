@@ -55,7 +55,7 @@ const OpinionStatus = ({
     useDeleteRevertOpinion(suggestionId);
 
   const isFinished = status === 'FINISHED';
-  const [{ id: mostVotedOpinionId }] = suggestionVotes.toSorted(
+  const [{ id: mostVotedOpinionId }] = [...suggestionVotes].sort(
     (a, b) => b.voteCount - a.voteCount,
   );
 
