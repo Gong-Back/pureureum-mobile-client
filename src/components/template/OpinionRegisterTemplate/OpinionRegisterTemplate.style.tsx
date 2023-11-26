@@ -7,17 +7,17 @@ export const Wrapper = styled.div`
     const { colors, fonts } = theme;
     return {
       display: 'flex',
-      'flex-direction': 'column',
-      'justify-content': 'center',
+      flexDirection: 'column',
+      justifyContent: 'center',
       padding: '90px 30px 60px',
 
       '.titleInput': {
         width: '100%',
-        'padding-left': 'unset',
+        paddingLeft: 'unset',
         ...fonts.mobile.subtitle1,
 
         border: 0,
-        'border-bottom': `1px solid ${colors.grayscale.gray100}`,
+        borderBottom: `1px solid ${colors.grayscale.gray100}`,
         color: colors.grayscale.gray400,
 
         '::placeholder': {
@@ -28,8 +28,8 @@ export const Wrapper = styled.div`
       '.contentInput': {
         width: '100%',
         height: '256px',
-        'vertical-align': 'top',
-        'text-align': 'left',
+        verticalAlign: 'top',
+        textAlign: 'left',
       },
     };
   }}

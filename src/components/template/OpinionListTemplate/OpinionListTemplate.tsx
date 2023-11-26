@@ -1,14 +1,27 @@
 import Text from '@/components/common/Text';
 import OpinionItem from '@/components/domain/Opinion/OpinionItem';
 import type { OpinionType } from '@/constants/types';
+import useIntersectionObserver from '@/hooks/useIntersectionObserver';
 import { useGetOpinionList } from '@/query-hooks/opinion';
 
 import * as styles from './OpinionListTemplate.style';
 
 const OpinionListTemplate = () => {
-  const { data: opinionDataList } = useGetOpinionList({
+  const {
+    data: opinionDataList,
+    fetchNextPage: fetchNextOpinionList,
+    hasNextPage,
+  } = useGetOpinionList({
     size: 10,
     status: 'FINISHED',
+  });
+
+  const handleFetchNextOpinion = (entries: IntersectionObserverEntry[]) => {
+    if (hasNextPage && entries[0].isIntersecting) fetchNextOpinionList();
+  };
+
+  const { targetRef } = useIntersectionObserver({
+    onIntersect: handleFetchNextOpinion,
   });
 
   const opinionList =
@@ -30,13 +43,18 @@ const OpinionListTemplate = () => {
       <Text fontStyleName="body2R">
         투표 기간 끝나서 완료되었던 것들 여기에 몰아넣을거에요
       </Text>
-      <styles.ListWrap>
+      <styles.ListWrap
+        ref={(element) => {
+          if (element?.lastElementChild)
+            targetRef.current = element.lastElementChild;
+        }}
+      >
         {opinionList.map((opinion) => (
           <OpinionItem
             key={opinion.id}
             id={opinion.id}
             title={opinion.title}
-            thumbnail={opinion.thumbnail}
+            thumbnailUrl={opinion.thumbnailUrl}
             startDate={opinion.startDate}
             endDate={opinion.endDate}
           />

@@ -4,11 +4,14 @@ import { useMemo, useState } from 'react';
 import {
   Controller,
   FormProvider,
+  SubmitHandler,
   useFieldArray,
   useForm,
   useWatch,
 } from 'react-hook-form';
 
+import { ApiErrorInstance } from '@/apis/API';
+import { OpinionRepository } from '@/apis/opinion';
 import CloseIconSvg from '@/assets/icons/closeIcon.svg';
 import LeftIconSvg from '@/assets/icons/leftIcon.svg';
 import Button from '@/components/common/Button';
@@ -28,9 +31,9 @@ const OpinionRegisterTemplate = () => {
   const formMethods = useForm<OpinionFormType>({
     defaultValues: {
       title: '',
-      description: '',
+      content: '',
       thumbnail: undefined,
-      opinions: [],
+      suggestionVotes: [],
     },
   });
 
@@ -39,7 +42,6 @@ const OpinionRegisterTemplate = () => {
     handleSubmit,
     setValue,
     setError,
-    formState: { errors },
   } = formMethods;
 
   const {
@@ -48,7 +50,7 @@ const OpinionRegisterTemplate = () => {
     remove: removeOpinion,
   } = useFieldArray({
     control,
-    name: 'opinions',
+    name: 'suggestionVotes',
   });
 
   const [thumbnail] = useWatch({
@@ -56,11 +58,9 @@ const OpinionRegisterTemplate = () => {
     name: ['thumbnail'],
   });
 
-  console.log(thumbnail);
-
   const { fileInputRef, handleUploadFile, removeUploadedFile } = useUploadFile({
     maxFileSize: 10 * 1024 * 1024,
-    allowFileTypes: ['jpeg', 'png'],
+    allowFileTypes: ['jpeg', 'jpg', 'png'],
     onError: {
       exceedFileSize: () =>
         setError('thumbnail', {
@@ -92,6 +92,29 @@ const OpinionRegisterTemplate = () => {
 
   const openFileDialog = () => fileInputRef.current?.click();
 
+  const submitNewOpinion: SubmitHandler<OpinionFormType> = async ({
+    title,
+    content,
+    suggestionVotes,
+  }) => {
+    try {
+      if (!thumbnail) return;
+      await OpinionRepository.postCreateOpinionAsync({
+        title,
+        content,
+        thumbnail,
+        suggestionVotes: suggestionVotes.map(({ opinion }) => opinion),
+      });
+      router.replace('/opinions');
+    } catch (error) {
+      if (error instanceof ApiErrorInstance) {
+        setError('root', { message: error.errorMessage });
+      } else {
+        throw error;
+      }
+    }
+  };
+
   return (
     // eslint-disable-next-line react/jsx-props-no-spreading
     <FormProvider {...formMethods}>
@@ -119,7 +142,7 @@ const OpinionRegisterTemplate = () => {
           </Text>
           <Controller
             control={control}
-            name="description"
+            name="content"
             rules={{ required: true, minLength: 1, maxLength: 300 }}
             render={({ field: { onChange, value } }) => (
               <style.TextArea
@@ -207,7 +230,11 @@ const OpinionRegisterTemplate = () => {
           </style.OptionList>
         </style.Section>
         <style.ButtonBox>
-          <Button isFilled isRound>
+          <Button
+            isFilled
+            isRound
+            onClick={() => handleSubmit(submitNewOpinion)()}
+          >
             작성 완료
           </Button>
           <Button

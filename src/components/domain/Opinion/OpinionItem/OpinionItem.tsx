@@ -9,7 +9,6 @@ import Text from '@/components/common/Text';
 import { COLORS } from '@/constants/styles';
 import type {
   OpinionStatusType,
-  OpinionType,
 } from '@/constants/types/OpinionTypes';
 
 import * as style from './OpinionItem.style';
@@ -19,7 +18,7 @@ dayjs.extend(isBetween);
 interface OpinionItemProps {
   id: number;
   title: string;
-  thumbnail: string;
+  thumbnailUrl: string;
   startDate: string;
   endDate: string;
 }
@@ -28,7 +27,7 @@ interface OpinionItemProps {
 const OpinionItem = ({
   id,
   title,
-  thumbnail,
+  thumbnailUrl,
   startDate,
   endDate,
 }: OpinionItemProps) => {
@@ -41,7 +40,7 @@ const OpinionItem = ({
   return (
     <style.Wrapper onClick={() => router.push(`/opinion/${id}`)}>
       <style.ThumbnailWrap>
-        <Image src={thumbnail} layout="fill" />
+        <Image src={thumbnailUrl} layout="fill" />
       </style.ThumbnailWrap>
       <style.InfoWrap>
         <Text
