@@ -10,5 +10,13 @@ export async function middleware(request: NextRequest) {
     if (accessToken) return NextResponse.redirect(origin);
   }
 
+  // 마이페이지 접근 시 access token이 없다면 로그인 화면으로 redirect.
+  if (pathname.startsWith('/mypage')) {
+    if (!accessToken) {
+      const loginUrl = new URL('/auth/login', origin);
+      return NextResponse.redirect(loginUrl);
+    }
+  }
+
   return NextResponse.next();
 }
