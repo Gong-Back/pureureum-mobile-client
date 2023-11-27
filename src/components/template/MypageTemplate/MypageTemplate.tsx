@@ -1,7 +1,5 @@
-import Image from 'next/image';
 import { useRouter } from 'next/router';
 
-import { AuthRepository } from '@/apis/auth';
 import LeftIconSvg from '@/assets/icons/leftIcon.svg';
 import Text from '@/components/common/Text';
 import {

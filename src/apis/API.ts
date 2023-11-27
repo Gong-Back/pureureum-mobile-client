@@ -6,7 +6,7 @@ import axios, {
 
 import { AuthRepository } from '@/apis/auth';
 import { API_URL, ERROR_CODE } from '@/constants/apis';
-import { ApiError, type ApiResponse } from '@/constants/types';
+import { ApiError } from '@/constants/types';
 
 /**
  * API 요청에서 범용적으로 사용할 Axios Instance 생성
@@ -31,7 +31,7 @@ API.interceptors.response.use(
     ) {
       try {
         // 똑같은 요청을 재전송 하여 refresh token 을 재인증하는 과정도 거친다
-        const retryResponse = await axios.request({
+        const retryResponse = await API({
           ...error.config,
         });
 

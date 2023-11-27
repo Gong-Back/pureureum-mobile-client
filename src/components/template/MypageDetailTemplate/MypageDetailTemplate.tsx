@@ -8,17 +8,14 @@ import CitizenCard from '@/components/domain/MyPage/CitizenCard';
 import MyProfileSection from '@/components/domain/MyPage/MyProfileSection';
 import {
   MypageNavInfo,
-  MyPAGE_NAV_ITEM_NAME as NavItem,
+  MyPAGE_NAV_ITEM_NAME as NavType,
 } from '@/constants/navigation';
 
 import * as styles from './MypageDetailTemplate.style';
 
-interface MypageDetailTemplateProps {
-  menu: NavItem;
-}
-
-const MypageDetailTemplate = ({ menu }: MypageDetailTemplateProps) => {
+const MypageDetailTemplate = () => {
   const router = useRouter();
+    const menu = router.query.menu as NavType;
 
   const count = 4;
 
