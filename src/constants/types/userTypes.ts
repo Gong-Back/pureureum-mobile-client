@@ -27,7 +27,7 @@ export type UserResponses = {
     profileUrl: string;
     attendCount: number;
   };
-  badge: { badgeUrl: string; isLocked: boolean }[];
+  badge: { badgeUrl: { badgeUrl: string; isLocked: boolean }[] };
   activity: {
     listTotalCount: number;
     culturalEventDtos: CultureEventInfoType[];

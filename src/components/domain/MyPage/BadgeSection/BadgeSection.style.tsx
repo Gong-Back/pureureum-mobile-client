@@ -13,12 +13,13 @@ export const Wrapper = styled.section`
 
 export const BadgeListCard = styled.section`
   width: 100%;
+
   padding: 40px 25px;
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 30px;
 
-  height: 360px;
+  height: fit-content;
   border-radius: 10px;
   background: ${COLORS.grayscale.cremeWhite};
   box-shadow: 0px 0px 5px 0px rgba(147, 147, 147, 0.25);
@@ -31,3 +32,7 @@ export const Badge = styled.div`
   gap: 3px;
   cursor: pointer;
 `;
+
+// export cosnt BadgeImgWrap = styled.div`
+
+// `

@@ -1,3 +1,5 @@
+import Image from 'next/image';
+
 import Text from '@/components/common/Text';
 import { COLORS } from '@/constants/styles';
 import useModal from '@/hooks/useModal';
@@ -10,7 +12,7 @@ interface BadgeSectionProps {
   count: number; // 가지고 있는 뱃지 개수
 }
 
-export const BadgeInfo = [
+export const BADGES = [
   {
     id: 1,
     name: '웰컴',
@@ -87,8 +89,10 @@ export const BadgeInfo = [
 const BadgeSection = ({ count }: BadgeSectionProps) => {
   const { openModal } = useModal();
 
-  const { data } = useGetUserBadges();
-  console.log(data);
+  const { data: badgeInfo } = useGetUserBadges();
+  const { badgeUrl } = badgeInfo;
+
+  const lockedBadge = badgeUrl[0].badgeUrl;
 
   return (
     <styles.Wrapper>
@@ -97,17 +101,25 @@ const BadgeSection = ({ count }: BadgeSectionProps) => {
         뱃지를 클릭하면 획득 방법을 확인할 수 있어요!
       </Text>
       <styles.BadgeListCard>
-        {BadgeInfo.map((badge) => (
-          <styles.Badge
-            key={badge.id}
-            onClick={() => openModal(<BadgeInfoModal id={badge.id} />)}
-          >
-            {/* bage icon */}
-            <Text fontStyleName="body3" color={COLORS.grayscale.dark}>
-              {badge.name}
-            </Text>
-          </styles.Badge>
-        ))}
+        {BADGES.map((badge) => {
+          const badgeImage =
+            badge.id < 5 ? badgeUrl[badge.id].badgeUrl : lockedBadge;
+          return (
+            <styles.Badge
+              key={badge.id}
+              onClick={() =>
+                openModal(
+                  <BadgeInfoModal id={badge.id} badgeImage={badgeImage} />,
+                )
+              }
+            >
+              <Image src={badgeImage} width={60} height={60} />
+              <Text fontStyleName="body3" color={COLORS.grayscale.dark}>
+                {badge.name}
+              </Text>
+            </styles.Badge>
+          );
+        })}
       </styles.BadgeListCard>
     </styles.Wrapper>
   );
